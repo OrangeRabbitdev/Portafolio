@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>Native IN 3D</title>
+    <script>
+        document.write('<script src="'+ (window.API_URL || 'https://s1.adform.net/banners/scripts/rmb/Adform.DHTML.js?bv='+ Math.random()) +'"><\/script>');
+        function adfOpenGlobalClickTAG() {
+            return function() {
+                var adfClickTAGName = 'clickTAG',
+                    adfClickTAGUrl = 'https://www.facebook.com/ChokisMx';
+                window.open(dhtml.getVar(adfClickTAGName, adfClickTAGUrl), dhtml.getVar('landingPageTarget', '_blank'));
+            }
+        }
+        function linkto() {
+            dhtml.sendEvent(6, 'Click');
+            console.log("Se lanza ClickFinal")
+            var callback = adfOpenGlobalClickTAG();
+            window.setTimeout(callback, 500);
+        }
+    </script>
+
+<!--
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/fullpage.css" />
+-->
+    <style>
+
+
+
+        .general-container{
+            display: block;
+            width: var(--ancho-banner) !important;
+            height: var(--alto-banner) !important;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+            background: rgb(242,228,230);
+            background-image: url("https://love4native.com/codes/CHOKIS/3dscroll/back.png");
+            padding-left: var(--margen-laterales);
+            padding-right: var(--margen-laterales);
+        }
+
+
+
+        canvas{
+            position: fixed;
+            pointer-events: none;
+            z-index: 998;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            padding: 0;
+            margin: 0;
+        }
+
+        @font-face{
+            font-family: "Titulos";
+            src: url("https://biznagamedia.com/code/Fuentes/Montserrat-Bold.otf");
+        }
+
+        @font-face{
+            font-family: "Parrafos";
+            src: url("https://biznagamedia.com/code/Fuentes/Roboto-Light.ttf");
+        }
+
+
+        .logo{
+            position: fixed;
+            width: 160px;
+            display: block;
+            top: 20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        h2{
+            font-family: "Titulos";
+            color: var(--color-titulos);
+            font-size: var(--tamaño-titulos);
+            font-weight: normal;
+            margin-bottom: var(--margen-abajo-titulos);
+            text-align: var(--alineacion-titulos);
+        }
+        p, span{
+            font-family: "Parrafos";
+            text-align: justify;
+            color: var(--color-parrafos);
+            font-size: var(--tamaño-parrafos);
+            text-align: var(--alineacion-parrafos);
+        }
+
+        .cta{
+            cursor: pointer;
+            animation: .5s cta alternate infinite ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .medida{
+            height: 600px;
+            width: 300px;
+        }
+
+        @keyframes cta{
+            from{
+                transform: scale(1);
+            }
+
+            to{
+                transform: scale(1.1);
+            }
+        }
+
+        #video{
+            width: 100%;
+            margin:10px 0 10px 0;
+            cursor: pointer;
+        }
+
+        .unmuted {
+            background-image: url(https://biznagamedia.github.io/BiznagaM/seat/resources/unmuted.png) !important;
+            background-size: 80%;
+        }
+
+        .muted {
+            background-image: url(https://biznagamedia.github.io/BiznagaM/seat/resources/muted.png);
+            background-size: 80%;
+        }
+
+        #sonido {
+            position: absolute;
+            min-width: 30px;
+            min-height: 30px;
+            border-radius: 5px;
+            left: 5px;
+            top: 143px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .box-video{
+            width: var(--ancho-banner);
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .fade{
+            opacity: 0;
+            margin-left: -35px;
+            display: none;
+        }
+
+        .bloque{
+            display: block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        
+        .contenedor-flotante{
+            position: absolute;
+            margin: auto;   
+            z-index: 998;   
+            cursor: pointer;
+        }
+
+        .fadeIzquierda{
+            transform: translateX(-500px);
+            opacity: 0;
+        }
+
+
+        .contenedor-flotante1{
+            top: 90px;
+
+        }
+
+        .contenedor-flotante1 p{
+            font-size: 14px;
+        }
+
+        .contenedor-flotante2{
+            bottom: 80px;
+        }
+
+        .contenedor-flotante2 p{
+            font-size: 14px;
+        }
+
+        .contenedor-flotante2 h2{
+            font-size: 36px;
+        }
+
+        .contenedor-flotante3 p, .contenedor-flotante3 h2{
+            text-align: center;
+        }
+
+        .contenedor-flotante3 h2{
+            font-size: 36px;
+        }
+
+        .contenedor-flotante3 p{
+            font-size: 14px;
+        }
+
+        .contenedor-flotante3{
+            top: 150px;
+        }
+
+        .contenedor-flotante4{
+            top: 70px;
+        }
+
+        .contenedor-flotante4 p{
+            font-size: 14px;
+        }
+        
+        .contenedor-flotante4 p, .contenedor-flotante4 h2{
+            text-align: left;
+        }
+
+        #bloque1{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #bloque2 img{
+            margin-top: 240px;
+        }
+
+        #bloque3 img{
+            margin-top: 270px;
+        }
+
+        #bloque4 img{
+            position: absolute;
+            top: 110px;
+            width: 90%;
+        }
+
+        #bloque1 img:nth-child(1){
+            width: auto;
+            display: block;
+            margin: auto;
+            z-index: 999;
+            margin-top: 330px;
+        }
+        #bloque1 img:nth-child(2){
+            width: 210px;
+            display: block;
+            margin: auto;
+            z-index: 999;
+
+        }
+
+        .widgets{
+            position: absolute;
+            display: block;
+            pointer-events: none;
+        }
+
+        .widget1{
+            top: -7px;
+        }
+
+        .indicador{
+            position: fixed;
+            top: 560px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 50px;
+            animation: .4s ease-in-out indicador alternate infinite;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+        }
+
+        .imagen{
+            width: 90%;
+            margin: auto;
+            display: block;
+            
+        }
+
+        #end{
+            bottom: 35px;
+        }
+
+        .button{
+            padding: .5em 1.2em .5em 1.2em;
+            border: 1px solid #fff;
+            background-color: #EA1C2D;
+            border-radius: 200px;
+            bottom: 60px;
+            position: absolute;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 99999;
+            transition: .6s;
+            color: #fff;
+            font-family: "Titulos";
+        }
+
+        #start{
+            left: 88px;
+        }
+
+        .button:hover{
+            background-color: #222222;
+            color: #fff;
+        }
+
+        @keyframes indicador{
+            from{
+                bottom: 40px;
+            }
+
+            to{
+                bottom: 20px;
+            }
+        }
+
+        #cargando{
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display: block;
+            width: 100px;
+            top: 280px;
+            z-index: 99999;
+            filter: hue-rotate(-50deg) saturate(500%) brightness(150%);
+        }
+
+        :root{
+            --ancho-banner:300px;
+            --alto-banner:600px;
+
+            --tamaño-titulos:44px;
+            --tamaño-parrafos:16px;
+            --tamaño-listas:32px;
+
+            --alineacion-titulos:right;
+            --alineacion-parrafos:right;
+
+            --margen-laterales:0px;
+            --margen-abajo-titulos:10px;
+
+            --color-fondo:#fff;
+            --color-titulos:#222222;
+            --color-parrafos:#222222;
+            --color-listas:#5e5e5e;
+            --viñetas-listas:none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="general-container" id="scroll">
+
+        <img src="https://love4native.com/codes/CHOKIS/3dscroll/flecha.png" class="indicador">
+        <img src="https://love4native.com/codes/Pandora/2024/Scroll/cargando.webp" id="cargando">
+        <img src="https://love4native.com/codes/CHOKIS/3dscroll/logo.png" class="logo">
+
+
+        <span class="button" id="start">Haz Scroll</span>
+
+
+        <div class="bloque" id="bloque1" onclick="linkto()">
+
+            <img src="https://love4native.com/codes/CHOKIS/3dscroll/copy2.png" alt="">
+            <img src="https://love4native.com/codes/CHOKIS/3dscroll/paquete-vertical.png" class="moverArriba">
+
+        </div>
+
+
+
+
+
+        <div class="bloque" id="bloque2" onclick="linkto()">
+
+            <img src="https://love4native.com/codes/CHOKIS/3dscroll/copy3.png" alt="">
+
+        </div>
+
+
+
+
+
+        <div class="bloque" id="bloque3" onclick="linkto()">
+
+            <img src="https://love4native.com/codes/CHOKIS/3dscroll/widget1.gif" alt="">
+        </div>
+
+
+
+
+        <div class="bloque" id="bloque4" onclick="linkto()">
+
+            <img src="https://love4native.com/codes/CHOKIS/3dscroll/copy.png" alt="">
+            <span class="button" id="end">Descubre más</span>
+        </div>
+
+    </div>
+
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
+                "GLTFLoader": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/GLTFLoader.js",
+                "FBXLoader": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/FBXLoader.js",
+                "OrbitControls": "https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js",
+                "RGBELoader": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/RGBELoader.js",
+                "DRACOLoader": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/DRACOLoader.js"
+            }
+        }
+    </script>
+    
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/vendors/scrolloverflow.js" integrity="sha512-7urtogCxmAdWbjguXmS8uNYQj3iX8SSfRldD7sJ1vJxFks3ktWxho5uIePfSPUVBH9Wo0PgEAf8uh1UCvMUQHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.2/fullpage.extensions.min.js" integrity="sha512-o8h1umhL70Qsc/Qcy2POHyW3cPh4fIsxHXaTz6ZCKxa9MQP8o5XROpprjYqQFUxbltR3YLjYgg4YhvuxbqjkfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    -->
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'GLTFLoader';
+        import { DRACOLoader } from 'DRACOLoader';
+        import { OrbitControls } from 'OrbitControls';
+        import { FBXLoader } from 'FBXLoader';
+        import { RGBELoader } from 'RGBELoader';
+        import TWEEN from 'https://cdn.skypack.dev/@tweenjs/tween.js';
+
+        let urlModels = "https://biznagamedia.com/code/CHOKIS/";
+        let urlHDRI = "https://biznagamedia.com/code/Pandora/hdr.hdr";
+        let Models = ['todo1.glb'];
+        let anchoBanner = 300;
+        let altoBanner = 600;
+
+        const animacionInicial = 
+            {
+                rotacionX: 45,
+                rotacionY: 207,
+                rotacionZ: 0,
+                posicionX: 0,
+                posicionY: -35,
+                posicionZ: 0,
+                escala: 10,
+                color1:{r:0.8, g:1.2, b:2},
+                color2:{r: 2, g:0.2, b:0.5},
+            };
+        
+
+        const FasesAnimaciones = [
+            //PRIMERA
+            {
+                rotacionX: 45,
+                rotacionY: 207,
+                rotacionZ: 0,
+                posicionX: 0,
+                posicionY: -35,
+                posicionZ: 0,
+                escala: 10,
+                color1:{r:0.8, g:1.2, b:2},
+                color2:{r: 2, g:0.2, b:0.5},
+            },
+
+            // SEGUNDA
+            {
+                rotacionX: 45,
+                rotacionY: 180,
+                rotacionZ: 20,
+                posicionX: 0,
+                posicionY: 20,
+                posicionZ: 0,
+                escala: 16,
+                color1:{r:0.8, g:1.2, b:2},
+                color2:{r: 2, g:0.2, b:0.5},
+            },
+
+            //TERCERA
+            {
+                rotacionX: -20,
+                rotacionY: 100,
+                rotacionZ: 20,
+                posicionX: 3,
+                posicionY: 15,
+                posicionZ: 0,
+                escala: 27,
+                color1:{r:0.8, g:1.2, b:2},
+                color2:{r: 3, g:0.2, b:0.5},
+            },
+
+            //CUARTA
+            {
+                rotacionX: 65,
+                rotacionY: 260,
+                rotacionZ: 0,
+                posicionX: 5,
+                posicionY: -20,
+                posicionZ: 0,
+                escala: 24,
+                color1:{r:0.8, g:1.2, b:2},
+                color2:{r: 0, g:2, b:4},
+            }
+        ];
+
+        let isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent); // Detecta si el usuario está en un dispositivo móvil, incluyendo iOS
+        let pasosAnimacion = isMobile ? 60 : 480; // Reducir pasos para móviles
+
+        let rotacionX = 45;
+        let rotacionY = 207;
+        let rotacionZ = 0;
+
+        let posicionX = 0;
+        let posicionY = -35;
+        let posicionZ = 0;
+
+        let escalaInicial = 10;
+
+
+        let ColorInicial1 = {r: 0.5, g:0.5, b:0.5};
+        let ColorInicial2 = {r: 0, g:1, b:0};
+
+
+        let Material1, Material2;
+
+        let RotacionAutomatica = false;
+        let Exposicion = 1.0;
+
+
+        let camera, scene, renderer, model, mixer, animations;
+        let controls;
+        let indexLoad = 0;
+
+
+
+
+        let cargado = false;   
+        init();
+        animate();
+
+        function degToRad(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+        function loadModel() {
+            const dracoLoader = new DRACOLoader();
+            dracoLoader.setDecoderPath('https://biznagamedia.com/code/interactivo3d/jsm/libs/draco/');
+
+            const gltfLoader = new GLTFLoader();
+            gltfLoader.setDRACOLoader(dracoLoader);
+            gltfLoader.setPath(urlModels).load(Models[indexLoad], function (gltf) {
+                model = gltf.scene;
+                model.scale.set(escalaInicial, escalaInicial, escalaInicial);
+                model.rotation.set(degToRad(rotacionX), degToRad(rotacionY), degToRad(rotacionZ));
+                model.position.set(posicionX, posicionY, posicionZ);
+                scene.add(model);
+                animations = gltf.animations;
+
+                model.traverse(child => {
+                    if (child.isMesh && child.material && child.material.name == 'Material_35') {
+                        Material1 = child.material;
+                        Material1.color.setRGB(ColorInicial1.r, ColorInicial1.g, ColorInicial1.b);
+                    }
+
+                    if (child.isMesh && child.material && child.material.name == 'Material_4') {
+                        Material2 = child.material;
+                        Material2.color.setRGB(ColorInicial2.r, ColorInicial2.g, ColorInicial2.b);
+                    }
+                });
+                if (animations && animations.length > 0) {
+                    mixer = new THREE.AnimationMixer(model);
+                    animations.forEach(animation => {
+                        const action = mixer.clipAction(animation);
+                        action.play(); // Play each animation
+                    });
+                    console.log('All animations started');
+                } else {
+                    console.log('No animations found in the GLB/GLTF file');
+                }
+            });
+        }
+
+        function init() {
+            let container = $(".general-container").append("<div>");
+            camera = new THREE.PerspectiveCamera(40, anchoBanner / altoBanner, 20, 5000);
+            camera.position.set(100, 50, 200);
+            scene = new THREE.Scene();
+
+            scene.add(camera);
+            loadModel();
+
+            new RGBELoader().load(urlHDRI, function (texture) {
+                texture.mapping = THREE.EquirectangularReflectionMapping;
+                scene.environment = texture;
+            });
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+            if (isMobile) {
+                renderer.setPixelRatio(0.2); // Reducir la resolución del renderizado en móviles
+            } else {
+                renderer.setPixelRatio(window.devicePixelRatio);
+            }
+
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = Exposicion;
+            renderer.outputEncoding = THREE.sRGBEnconding;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(anchoBanner, altoBanner);
+            container.append(renderer.domElement);
+
+            console.log("Inicializado");
+            cargado = true;
+           
+        }
+
+        function animate() {
+            setTimeout(function() {
+                requestAnimationFrame(animate);
+                TWEEN.update();
+                renderer.render(scene, camera);
+                camera.lookAt(scene.position);
+                if (mixer) mixer.update(0.01);
+            }, isMobile ? 1000 / 30 : 1000 / 60); // 30 FPS en móviles, 60 FPS en desktop
+        }
+
+
+
+
+        $(document).ready(function(){
+
+            $("#cargando").show();
+
+            let scrolling = false;
+            let scrollIndex = 0;
+            let container = $("#scroll");
+            let sections = container.find(".bloque");
+            
+            $("#start").click(function(e){
+                scrollIndex = 1;
+                onScroll(e);
+            });
+
+            let startY = 0;
+            let endY = 0;
+            let touchMoved = false;
+
+            container.on("wheel", function (e) {
+                e.preventDefault();
+                onScroll(e, e.originalEvent.deltaY);
+            });
+
+            container.on("touchstart", function (e) {
+                startY = e.originalEvent.touches[0].clientY;
+                touchMoved = false;
+            });
+
+            container.on("touchmove", function (e) {
+                endY = e.originalEvent.touches[0].clientY;
+                touchMoved = true; // Indica que hubo un movimiento
+
+                // Si el movimiento es significativo, previene el desplazamiento de la página
+                if (Math.abs(startY - endY) > 5) {
+                    e.preventDefault();
+                }
+            });
+
+            container.on("touchend", function (e) {
+                if (!touchMoved) {
+                    // Si no hubo movimiento, considera esto como un click
+                    $(e.target).trigger('click');
+                } else {
+                    let deltaY = startY - endY;
+                    onScroll(e, deltaY);
+                }
+            });
+
+           function onScroll(e, deltaY) {
+                e.preventDefault();
+
+                if (!scrolling) {
+                    console.log("interactuando");
+
+                    if (deltaY > 0 && scrollIndex < sections.length - 1) {
+                        scrollIndex++;
+                    } else if (deltaY < 0 && scrollIndex > 0) {
+                        scrollIndex--;
+                    }
+
+                    const state = FasesAnimaciones[scrollIndex];
+                    animateTransition(model, state, pasosAnimacion);
+
+                    scrolling = true;
+                    $.extend($.easing, {
+                        easeOutCubic: function (x, t, b, c, d) {
+                            return c * ((t = t / d - 1) * t * t + 1) + b;
+                        }
+                    });
+
+                    container.animate({
+                        scrollTop: sections.eq(scrollIndex).offset().top - container.offset().top + container.scrollTop()
+                    }, {
+                        duration: 2000, // Ajusta la duración según sea necesario
+                        easing: 'easeOutCubic',
+                        complete: function () {
+                            scrolling = false;
+                        }
+                    });
+
+                    // Efectos
+                    // Mostrar el elemento actual en el scrollIndex
+                    $($(".fadeIzquierda")[scrollIndex])
+                        .css({ transform: 'translateX(-500px)', opacity: 0 })
+                        .animate({
+                            opacity: 1,
+                            translateX: '0px'
+                        }, {
+                            step: function (now, fx) {
+                                if (fx.prop === "translateX") {
+                                    $(this).css({ transform: `translateX(${now}px)` });
+                                }
+                            },
+                            duration: 1600
+                        });
+
+                    $(".fadeIzquierda").each(function (index, element) {
+                        if (index !== scrollIndex) {
+                            $(element).animate({
+                                opacity: 0,
+                                translateX: '-500px'
+                            }, {
+                                step: function (now, fx) {
+                                    if (fx.prop === "translateX") {
+                                        $(this).css({ transform: `translateX(${now}px)` });
+                                    }
+                                },
+                                duration: 1000
+                            });
+                        }
+                    });
+
+                    $($(".moverArriba")[scrollIndex])
+                        .css({ transform: 'translateY(-150px)' })
+                        .animate({
+                            translateY: '0px'
+                        }, {
+                            step: function (now, fx) {
+                                if (fx.prop === "translateY") {
+                                    $(this).css({ transform: `translateY(${now}px)` });
+                                }
+                            },
+                            duration: 1600
+                        });
+
+
+                    $(".moverArriba").each(function (index, element) {
+                        if (index !== scrollIndex) {
+                            $(element).animate({
+                                translateY: '-250px'
+                            }, {
+                                step: function (now, fx) {
+                                    if (fx.prop === "translateY") {
+                                        $(this).css({ transform: `translateY(${now}px)` });
+                                    }
+                                },
+                                duration: 1000
+                            });
+                        }
+                    });
+
+                    if (scrollIndex >= sections.length - 1) {
+                        $(".indicador").animate({ opacity: 0, display: "none" }, 600);
+                    } else {
+                        $(".indicador").animate({ opacity: 1, display: "block" }, 600);
+                    }
+                }
+            }
+
+
+
+
+   
+                
+                $($(".fadeIzquierda")[scrollIndex])
+                        .animate({
+                            opacity: 1,
+                            translateX: '0px'
+                        }, {
+                            step: function(now, fx) {
+                                if (fx.prop === "translateX") {
+                                    $(this).css({ transform: `translateX(${now}px)` });
+                                }
+                            },
+                            duration: 2000
+                });
+
+
+        });
+
+        $(document).ready(function() {
+            let checkModelInterval = setInterval(() => {
+                console.log("Comprobando");
+                if (model && cargado) {
+                    console.log("Comprobando finalizado");
+                    $("#cargando").fadeOut();
+                    // Ejecuta la animación solo cuando model existe y está cargado
+                    animateTransition(model, animacionInicial, pasosAnimacion);
+
+                    // Limpia el intervalo para que no se ejecute más
+                    clearInterval(checkModelInterval);
+                }
+            }, 100); // Verifica cada 100ms
+        });
+                
+
+        function animateTransition(model, state, pasos){
+            
+            if (!model) {
+                console.error("Model not loaded or undefined");
+                return;
+            }
+            console.log("Animando a " + pasos + " pasos");
+            const duration = 3000; // Duración de la animación en milisegundos (2 segundos)
+            const steps = pasos; // Número de pasos en la animación (120 frames)
+            let currentStep = 0;
+
+            const initialRotation = { x: model.rotation.x, y: model.rotation.y, z: model.rotation.z };
+            const initialPosition = { x: model.position.x, y: model.position.y, z: model.position.z };
+            const initialScale = { x: model.scale.x, y: model.scale.y, z: model.scale.z };
+            let initialColor1;
+            let initialColor2;
+
+            if(Material1){
+                 initialColor1 = { r: Material1.color.r, g: Material1.color.g, b: Material1.color.b };
+            }else{
+                console.log("No tiene Material 1");
+            }
+
+            if(Material2){
+                 initialColor2 = { r: Material2.color.r, g: Material2.color.g, b: Material2.color.b };
+
+            }else{
+                console.log("No tiene Material 2");
+            }
+
+            //
+            const targetRotation = {
+                x: degToRad(state.rotacionX),
+                y: degToRad(state.rotacionY),
+                z: degToRad(state.rotacionZ)
+            };
+
+            const animateStep = () => {
+                const factor = easeOutCubic(currentStep / steps);
+
+                // Interpolar rotación
+                const newRotation = interpolacionRotacion(initialRotation, targetRotation, factor);
+                model.rotation.set(newRotation.x, newRotation.y, newRotation.z);
+
+                // Interpolar posición
+                const newPosition = interpolacionPosicion(initialPosition, { x: state.posicionX, y: state.posicionY, z: state.posicionZ }, factor);
+                model.position.set(newPosition.x, newPosition.y, newPosition.z);
+
+                // Interpolar escala
+                const newScale = interpolacionEscala(initialScale, { x: state.escala, y: state.escala, z: state.escala }, factor);
+                model.scale.set(newScale.x, newScale.y, newScale.z);
+
+                // Interpolar color
+                if (Material1) {
+                    const newColor1 = interpolacionColor(initialColor1, state.color1, factor);
+                    Material1.color.setRGB(newColor1.r, newColor1.g, newColor1.b);
+                }
+                if (Material2) {
+                    const newColor2 = interpolacionColor(initialColor2, state.color2, factor);
+                    Material2.color.setRGB(newColor2.r, newColor2.g, newColor2.b);
+                }
+
+                renderer.render(scene, camera);
+
+                currentStep++;
+                if (currentStep <= steps) {
+                    requestAnimationFrame(animateStep);
+                }
+            };
+
+            animateStep();
+        }
+
+        // Función de interpolación de color
+        function interpolacionColor(color1, color2, factor) {
+            const result = {
+                r: color1.r + (color2.r - color1.r) * factor,
+                g: color1.g + (color2.g - color1.g) * factor,
+                b: color1.b + (color2.b - color1.b) * factor
+            };
+            return result;
+        }
+
+        // Función de interpolación de escala
+        function interpolacionEscala(escalaInicial, escalaObjetivo, factor){
+            const result = {
+                x: escalaInicial.x + (escalaObjetivo.x - escalaInicial.x) * factor,
+                y: escalaInicial.y + (escalaObjetivo.y - escalaInicial.y) * factor,
+                z: escalaInicial.z + (escalaObjetivo.z - escalaInicial.z) * factor
+            }
+            return result;
+        }
+
+        // Función de interpolación de posición
+        function interpolacionPosicion(posicionInicial, posicionObjetivo, factor){
+            const result = {
+                x: posicionInicial.x + (posicionObjetivo.x - posicionInicial.x) * factor,
+                y: posicionInicial.y + (posicionObjetivo.y - posicionInicial.y) * factor,
+                z: posicionInicial.z + (posicionObjetivo.z - posicionInicial.z) * factor
+            }
+            return result;
+        }
+
+        // Función de interpolación de rotación
+        function interpolacionRotacion(rotacionInicial, rotacionObjetivo, factor){
+            const result = {
+                x: rotacionInicial.x + (rotacionObjetivo.x - rotacionInicial.x) * factor,
+                y: rotacionInicial.y + (rotacionObjetivo.y - rotacionInicial.y) * factor,
+                z: rotacionInicial.z + (rotacionObjetivo.z - rotacionInicial.z) * factor
+            }
+            return result;
+        }
+
+        // Función de interpolación cúbica para suavizar la animación
+        function cubicEaseInOut(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+
+        function animateColorChange(material, targetColor, duration) {
+            const currentColor = { r: material.color.r, g: material.color.g, b: material.color.b };
+            new TWEEN.Tween(currentColor)
+                .to(targetColor, duration)
+                .onUpdate(() => {
+                    material.color.setRGB(currentColor.r, currentColor.g, currentColor.b);
+                })
+                .start();
+        }
+
+        let bloquesIMG = $(".bloques img");
+        bloquesIMG.on("click", linkto);
+    </script>
+
+    <script>
+        var video = document.getElementById("video");
+        var sonido = document.getElementById("sonido");
+        var clo = 0;
+        var count = 1;
+        var count2 = 1;
+
+        if(sonido){
+            sonido.onclick = function() {
+                if (count2 % 2 == 0) {
+                    video.muted = true;
+                    sonido.classList.remove("unmuted");
+                    console.log('muted');
+                } else {
+                    video.muted = false;
+                    sonido.classList.add("unmuted");
+                    console.log('unmuted');
+                }
+                count2++;
+            }
+        }
+
+        function min() {
+            if(video){
+                var total = Math.trunc(video.duration);
+                var porcent = Math.trunc(video.currentTime);
+                var porcent25 = Math.trunc(total * 0.25);
+                var porcent50 = Math.trunc(total * 0.50);
+                var porcent75 = Math.trunc(total * 0.75);
+                var porcent100 = Math.trunc(total * 0.999);
+
+                if (porcent == 0 && clo == 0) {
+                    dhtml.sendEvent(1, 'video_0%');
+                    console.log("Se lanza cuartil 0")
+                    clo = 1;
+                    console.log(porcent);
+                }
+                if (porcent == porcent25 && clo == 1) {
+                    dhtml.sendEvent(2, 'video_25%');
+                    console.log("Se lanza cuartil 25")
+                    clo = 2;
+                    console.log(25);
+                }
+                if (porcent == porcent50 && clo == 2) {
+                    dhtml.sendEvent(3, 'video_50%');
+                    console.log("Se lanza cuartil 50")
+                    clo = 3;
+                    console.log(50);
+                }
+                if (porcent == porcent75 && clo == 3) {
+                    dhtml.sendEvent(4, 'video_75%');
+                    console.log("Se lanza cuartil 75")
+                    clo = 4;
+                    console.log(75);
+                }
+                if (porcent == porcent100 && clo == 4) {
+                    dhtml.sendEvent(5, 'video_100%');
+                    console.log("Se lanza cuartil 100")
+                    clo = 5;
+                    console.log(100);
+                }
+            }
+        }
+
+        setInterval('min()', 1000);
+    </script>
+</body>
+</html>

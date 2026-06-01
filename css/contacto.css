@@ -1,0 +1,85 @@
+#contactos{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+#contactos article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+
+#contactos img{
+    width: 90px;
+    display: block;
+    margin: auto auto 25px auto;
+}
+
+#contactos article h2{
+    font-size: 15px;
+    text-align: center;
+}
+
+#despedida{
+    margin-top: 50px;
+}
+
+@media (max-width: 1600px){
+    #contactos article{
+        margin: 38px;
+    }
+}
+
+@media (max-width: 1200px){
+    #contactos{
+        flex-wrap: wrap;
+        max-width: 720px;
+        padding-top: 60px;
+    }
+
+    #contactos article{
+        width: 260px;
+        margin: 28px;
+    }
+
+    #despedida{
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px){
+    #contactos{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    #contactos article{
+        width: 100%;
+        margin: 18px 0;
+    }
+
+    #contactos img{
+        width: 68px;
+        margin-bottom: 16px;
+    }
+
+    #contactos article h2{
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        line-height: 1.35;
+    }
+
+    #despedida{
+        margin-top: 22px;
+        text-align: center;
+        font-size: 1.25rem;
+    }
+}

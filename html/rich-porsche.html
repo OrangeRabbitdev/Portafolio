@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="ad.size" content="width=300, height=600">
+    <title>Rich_300x600</title>
+
+    <script>
+        var clickTag = "https://configurator.porsche.com/es-CL/mode/model/9921B2?options=1PE.7HK.6FG.QH1.VL0.1X2.6EE.IV9.3S0.9P9.4L6.GT5.3HA.K8C.7V0.6XV.0I3.9WT.4UF.1NA.QJ6.6F0.2V1.6BA.1P0.6RC.7M9.IW0.9JA.9VL.7K3.0TD.6JD.3UG.5XC.6NJ.G1F.6I3.KQ1.3B3.VR0.FM0.E0A.7UG.1BH.VF0.D8R.0NB.2W0.9AD.4A3.9ZE.8IT.EM2.7AK.4GP.FZ0.5MA.1LS.8N7.QQ2.8VG.UI2.1N1.GV1.D9.1G8.UD1.1T3.PH.3J7.Q2J.3FE.95B.2PJ.8T3.0P8.7Y8.8LH.FT3.4F2.6E2.59B.VC2.6A7&viz-mode=3d";
+    </script>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #banner {
+            width: 300px;
+            height: 600px;
+            position: relative;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        video {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        video.active {
+            opacity: 1;
+        }
+
+        #botones {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            margin-top: 325px;
+            z-index: 99;
+            /* Pone los botones por encima del video */
+        }
+
+        #botones img {
+            width: 85px;
+            animation: 2s destello-suave alternate infinite ease-in-out;
+        }
+
+
+
+        #rines {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            left: 0;
+            right: 0;
+            margin-top: 240px;
+        }
+
+        #rines img {
+            width: 75px;
+            margin: auto;
+            border-radius: 50%;
+        }
+
+        #cta {
+            position: absolute;
+            bottom: 30px;
+            cursor: pointer;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 999;
+            animation: 2s destello alternate infinite ease-in-out;
+            border-radius: 10px;
+        }
+
+        @keyframes destello {
+            0% {
+                box-shadow: 0 0 0 0 rgb(0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0.9);
+            }
+
+            40% {
+                box-shadow: 0 0 0 20px rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0.9);
+            }
+
+            80% {
+                box-shadow: 0 0 0 20px rgba(0, 123, 255, 0.0), 0 0 0 25px rgba(0, 0, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.0), 0 0 0 25px rgba(0, 0, 0, 0);
+            }
+        }
+
+        @keyframes destello-suave {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(0, 0, 0, 0.5);
+            }
+
+            40% {
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0.5);
+            }
+
+            80% {
+                box-shadow: 0 0 0 10px rgba(0, 123, 255, 0), 0 0 0 12px rgba(0, 0, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 123, 255, 0), 0 0 0 12px rgba(0, 0, 0, 0);
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="banner">
+
+        <img onclick="window.open(window.clickTag, '_blank')" src="https://love4native.com/codes/porsche/CTA.png" alt=""
+            id="cta">
+
+        <div id="botones">
+            <div id="colores">
+                <img src="https://love4native.com/codes/porsche/rich/rojo.jpg" id="color1">
+                <img src="https://love4native.com/codes/porsche/rich/verde.jpg" id="color2">
+                <img src="https://love4native.com/codes/porsche/rich/azul.jpg" id="color3">
+            </div>
+            <div id="rines">
+                <img src="https://love4native.com/codes/porsche/rich/rin1.jpg" alt="" id="rin1">
+                <img src="https://love4native.com/codes/porsche/rich/rin2.jpg" alt="" id="rin2">
+                <img src="https://love4native.com/codes/porsche/rich/rin3.jpg" alt="" id="rin3">
+            </div>
+        </div>
+
+
+        <div class="video-container">
+            <video id="auto1" class="active" loop muted webkit-playsinline playsinline>
+                <source src="https://love4native.com/codes/porsche/rich/verde_rin1.mp4">
+            </video>
+            <video id="auto2" loop muted webkit-playsinline playsinline></video>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+
+
+<script>
+    const baseDir = "https://love4native.com/codes/porsche/rich/";
+
+    // Estado inicial basado en el video por defecto en el HTML (verde con rin1)
+    let state = {
+        color: 'verde',
+        rin: 'rin1'
+    };
+
+    // Mapeo de IDs de elementos a sus valores correspondientes
+    const colors = {
+        'color1': 'rojo',
+        'color2': 'verde',
+        'color3': 'azul'
+    };
+
+    const rines = {
+        'rin1': 'rin1',
+        'rin2': 'rin2',
+        'rin3': 'rin3'
+    };
+
+    const video1 = document.getElementById('auto1');
+    const video2 = document.getElementById('auto2');
+    let currentVideo = 1;
+
+    // Función principal para actualizar el video con transición suave (crossfade)
+    function updateVideo() {
+        const newFileName = `${state.color}_${state.rin}.mp4`;
+        const newSrc = `${baseDir}${newFileName}`;
+
+        let activeVideo = currentVideo === 1 ? video1 : video2;
+        let nextVideo = currentVideo === 1 ? video2 : video1;
+
+        // Si ya estamos reproduciendo este estado, no hacemos nada
+        if (!activeVideo.src.endsWith(newFileName) && (!activeVideo.currentSrc || !activeVideo.currentSrc.endsWith(newFileName))) {
+
+            // Cargar en el video inactivo
+            nextVideo.src = newSrc;
+            nextVideo.load();
+
+            const playPromise = nextVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Una vez que comienza a reproducirse el nuevo video, hacemos fade in
+                    nextVideo.classList.add('active');
+                    activeVideo.classList.remove('active');
+
+                    // Actualizar el puntero al video actual
+                    currentVideo = currentVideo === 1 ? 2 : 1;
+                }).catch(error => {
+                    console.log("Autoplay prevenido por el navegador:", error);
+                });
+            }
+        }
+    }
+
+    let autoInterval = null;
+
+    // Función para detener la animación automática y el destello cuando el usuario interactúa
+    function stopAuto(type) {
+        if (autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+        }
+        
+        // Quitar la animación específica dependiendo del botón clickeado
+        if (type === 'color') {
+            const coloresImg = document.querySelectorAll('#colores img');
+            coloresImg.forEach(img => {
+                img.style.animation = 'none';
+            });
+        } else if (type === 'rin') {
+            const rinesImg = document.querySelectorAll('#rines img');
+            rinesImg.forEach(img => {
+                img.style.animation = 'none';
+            });
+        }
+    }
+
+    // Agregar eventos de clic a las imágenes de los colores
+    Object.keys(colors).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.cursor = 'pointer'; // Cambiar cursor para indicar que es clickeable
+            el.addEventListener('click', () => {
+                stopAuto('color'); // Detener autoplay y animación de colores
+                state.color = colors[id];
+                updateVideo(); // Actualizar el video con el nuevo color y el rin guardado
+            });
+        }
+    });
+
+    // Agregar eventos de clic a las imágenes de los rines
+    Object.keys(rines).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.style.cursor = 'pointer'; // Cambiar cursor para indicar que es clickeable
+            el.addEventListener('click', () => {
+                stopAuto('rin'); // Detener autoplay y animación de rines
+                state.rin = rines[id];
+                updateVideo(); // Actualizar el video con el nuevo rin y el color guardado
+            });
+        }
+    });
+
+    // Lógica para alternar automáticamente entre colores y rines
+    const colorList = ['rojo', 'verde', 'azul'];
+    const rinList = ['rin1', 'rin2', 'rin3'];
+    let colorIndex = 1; // Inicia en verde
+    let rinIndex = 0;   // Inicia en rin1
+    let alterToggle = true;
+
+    autoInterval = setInterval(() => {
+        if (alterToggle) {
+            colorIndex = (colorIndex + 1) % colorList.length;
+            state.color = colorList[colorIndex];
+        } else {
+            rinIndex = (rinIndex + 1) % rinList.length;
+            state.rin = rinList[rinIndex];
+        }
+        alterToggle = !alterToggle;
+        updateVideo();
+    }, 2000); // Cambia cada 2 segundos
+</script>
+
+</html>

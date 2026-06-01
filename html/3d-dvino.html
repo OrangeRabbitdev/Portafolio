@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden;">
+	<head>
+		<title>three.js webgl - OBJLoader + MTLLoader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+		<script>
+			  document.write('<script src="'+ (window.API_URL || 'https://s1.adform.net/banners/scripts/rmb/Adform.DHTML.js?bv='+ Math.random()) +'"><\/script>');
+        //DECLARACION DE CLICKTAGS a usar en el formato
+        //TODO: Recuerda que los clickTag's deben llamarse exactamente igual ya que diferencia incluso mayusculas y minusculas, la URL tambien debe ser identica para evitar conflictos, en ambos caso tanto en este documento como en el "manifest.json"
+        function adfOpenGlobalClickTAG() {
+            return function() {
+                var adfClickTAGName = 'clickTAG',
+                    adfClickTAGUrl = 'https://www.airwick.com.mx/productos/essential-mist/';
+                window.open(dhtml.getVar(adfClickTAGName, adfClickTAGUrl), dhtml.getVar('landingPageTarget', '_blank'));
+            }
+        }
+        //Funcion para lanzar evento de click despues de que el usuario final haya votado
+        function linkto() {
+           // console.log("click");
+            dhtml.sendEvent('5', 'ClickFinal', null);
+            // Lanzamiento evento Click
+            console.log("Se lanza ClickFinal")
+            ///////////////////////////////////////
+            var callback = adfOpenGlobalClickTAG();
+            window.setTimeout(callback, 500);
+        }
+		</script>
+		   
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+
+			body{
+				background: #fff;
+			}
+
+			.container{
+				width: 320px;
+				height: 480px;
+				position: absolute;
+				background-image: url('https://love4native.com/wp-content/uploads/2022/10/pantalla-01-6.png');
+				margin: auto;
+				
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			canvas{
+				position: absolute;
+				margin: auto;
+				
+			}
+			#manita{
+				pointer-events: none;
+    height: 80px;
+    width: 71px;
+    position: absolute;
+    top: 300px;
+    left: 30px;
+    z-index: 999;
+		    	display: none;
+				background-image: url(https://love4native.com/wp-content/uploads/2021/08/Manita-Blanca.png);
+				background-size: 80%;
+				background-repeat: no-repeat;
+
+		    }
+		
+
+		/*----------------borrar-----------------*/
+		.link{
+			width: 320px;
+    height: 160px;
+    position: absolute;
+    background-color: #00ffff00;
+	opacity: 0;
+    z-index: 999;
+    top: 355px;
+		}
+
+		.LataAzul{
+			background-image:url(https://love4native.com/wp-content/uploads/2022/09/azul-5.png);
+		}
+
+
+		.LataMorada{
+			background-image:url(https://love4native.com/wp-content/uploads/2022/09/morada.png);
+		}
+
+		.LataRosa{
+			background-image:url(https://love4native.com/wp-content/uploads/2022/10/rosa.png);
+		}
+
+		.buttons-container{
+			position: absolute;
+			bottom: 0;
+			left: 30px;
+			right: 0;
+			top: 322px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 250px;
+			height: 0;
+		}
+
+		.latas{
+			position: relative;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100%;
+			z-index: 998;
+			cursor: pointer;
+			width: 60px;
+			height: 60px;
+			animation: object .5s ease-in infinite alternate;
+			-webkit-animation: object .5s ease-in infinite alternate;
+			transition: 1s;
+		}
+
+		.latas:hover{
+			transform: scale(1.1);
+			animation: none !important;
+		}
+
+		@keyframes object{
+			from{
+				transform: scale(1);
+			}
+
+			to{
+				transform: scale(1.1);
+			}
+		}
+
+
+		.animation-fx{
+				width: 320px;
+				height: 480px;
+				position: absolute;
+				margin: auto;				
+				pointer-events: none;
+				z-index: -1;
+		}
+
+		.link2{
+			position: absolute;
+			display: block;
+			cursor: pointer;
+			width: 320px;
+			height: 60px;
+			z-index: 999;
+		}
+
+		.indicador{
+			display: block;
+			position: absolute;
+			margin: auto;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			pointer-events: none;
+			z-index: 999;
+			width: 320px;
+			height: 480px;
+		}
+
+		.indicador img{
+			display: block;
+			margin-top: -100px;
+			width: 100px;
+		}
+		</style>
+	</head>
+
+
+	<body>
+		<div class="indicador">
+			<img src="https://love4native.com/wp-content/uploads/2022/10/rotaranimado.gif" >
+		</div>
+		<div class="container"></div>
+		<div class="animation-fx">
+			<video src="https://biznagamedia.com/code/interactivo3d/Burbujas_320x480.mp4" autoplay muted loop playisinline="true" webkit-playisinline="true"></video>
+		</div>
+		<a class="link" onclick="linkto()"></a>
+		<a class="link2"></a>
+		<div id="manita"></div>
+		<div class="buttons-container">
+			<div class="LataAzul latas"></div>
+			<div class="LataMorada latas"></div>
+			<div class="LataRosa latas"></div>
+		</div>
+		
+
+		</div>
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+		<script>
+			
+		$(document).ready(function() {
+						
+						animateManita();
+						
+							window.setTimeout(function(){
+							animateManita();
+							}, 1100);
+					
+					
+		
+		
+					});
+		function animateManita(){
+			$('#manita').fadeIn('fast').animate({
+			'left': '220px'
+			}, 1000, function() {
+			$('#manita').fadeOut("slow");
+            
+			});
+
+			$('#manita').fadeIn('fast').animate({
+			'left': '30px'
+			}, 1500, function() {
+			$('#manita').fadeOut("slow");
+            
+			});
+		
+					}
+		</script>
+
+
+<script>
+	$(document).ready(function(){
+		setInterval(FadeOutIndicador, 6000);
+	});	
+
+	function FadeOutIndicador(){
+		$('.indicador').fadeOut(300);
+	}
+</script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://biznagamedia.com/code/interactivo3d/three.module.js"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+
+			import { MTLLoader } from 'https://biznagamedia.com/code/interactivo3d/jsm/loaders/MTLLoader.js';
+			import { OBJLoader } from 'https://biznagamedia.com/code/interactivo3d/jsm/loaders/OBJLoader.js';
+			import { GLTFLoader } from 'https://biznagamedia.com/code/interactivo3d/jsm/loaders/GLTFLoader.js';
+			import { OrbitControls } from 'https://biznagamedia.com/code/interactivo3d/jsm/controls/OrbitControls.js';
+			import {RGBELoader} from "https://biznagamedia.com/code/interactivo3d/jsm/loaders/RGBELoader.js";
+
+			let camera, scene, renderer;
+
+			let mouseX = 0, mouseY = 0;
+
+
+			
+			let canvasWidth = 320;
+			let canvasHeight = 480;
+			let controls;
+			let indexLoad = 0;
+			let GLBModels = ['Lata_azul', 'Lata_morada', 'Lata_rosa'];
+
+
+			init();
+			animate();
+
+			function loadGLB(){
+					new GLTFLoader().setPath('https://biznagamedia.com/code/interactivo3d/models/glb/')
+					.load(GLBModels[indexLoad]+'.glb', function(glb){
+
+						glb.scene.scale.set(120,120,120);
+						glb.scene.position.set(0,45,0);
+						scene.add(glb.scene);
+
+				});
+				}
+
+			function init() {
+
+
+				const container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 80, canvasWidth / canvasHeight, 20, 5000 );
+				//camera.position.z = 650;
+				//camera.position.y = 750;
+				camera.position.set(100,50,200); // Set position like this
+				//camera.fov = 20;
+				
+
+				// scene
+
+				scene = new THREE.Scene();
+
+				//const geometry = new THREE.BoxGeometry( 5, 5, 5 );
+//const material = new THREE.MeshNormalMaterial();
+
+				const ambientLight = new THREE.AmbientLight( 0xffdb95, 0 );
+				scene.add( ambientLight );
+
+				const directionalLight = new THREE.DirectionalLight( 0xffffff, 2 );
+				scene.add( directionalLight );
+
+				const pointLight = new THREE.PointLight( 0xffffff, 1 );
+				camera.add( pointLight );
+				scene.add( camera );
+
+
+				// model
+
+				const onProgress = function ( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						const percentComplete = xhr.loaded / xhr.total * 100;
+						//console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+					}
+
+				};
+
+
+
+				loadGLB();
+
+
+
+
+
+				//
+				//BACKGROUND JPG
+				let backLoader = new THREE.TextureLoader();
+				backLoader.load('https://biznagamedia.com/code/interactivo3d/v.mp4', function(texture){
+					scene.background = texture;
+				});
+
+				//
+				//BACKGROUND HDR
+				
+				new RGBELoader().load("https://biznagamedia.com/code/interactivo3d/es.hdr", function(texture){
+					texture.mapping = THREE.EquirectangularReflectionMapping;
+					//scene.background = texture;
+					scene.environment = texture;
+				});
+
+
+
+
+				renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true});
+
+				//HDRI
+				renderer.toneMapping = THREE.ACESFilmicToneMapping;
+				renderer.toneMappingExposure = 0.6;
+				renderer.outputEncoding = THREE.sRGBEnconding;
+
+
+				renderer.outputEncoding = THREE.sRGBEncoding;
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( canvasWidth, canvasHeight );
+				container.appendChild( renderer.domElement );
+
+				
+				//CONTROLES
+				controls = new OrbitControls(camera, renderer.domElement);
+				controls.autoRotate = true;
+				controls.autoRotateSpeed = - 1.0;
+				controls.enableDamping = true;
+
+				
+var contador = 0;
+				controls.addEventListener('start', function(){
+					contador++;
+						if(contador <= 1){
+							
+							dhtml.sendEvent('1', 'move_3d');
+							console.log("move_3d");
+						}
+					});
+
+				//POR SI SE NECESITA
+				//controls.addEventListener('change', ()=> console.log("Change"));
+				//controls.addEventListener('end', ()=> console.log("Se detuvo"));
+
+
+
+/*
+				document.addEventListener( 'mousemove', onDocumentMouseMove );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize );
+				
+*/
+			}
+			$('.LataAzul').click(function(){
+
+				dhtml.sendEvent('2', 'LataAzul', null);
+            // Lanzamiento evento Click
+            console.log("LataAzul")
+
+				indexLoad = 0;
+				loadGLB();
+				$('.indicador').fadeOut(300);
+				clearInterval(interval);		
+			});	
+			$('.LataMorada').click(function(){
+
+				dhtml.sendEvent('3', 'LataMorada', null);
+            // Lanzamiento evento Click
+            console.log("LataMorada")
+
+				indexLoad = 1;
+				loadGLB();
+				$('.indicador').fadeOut(300);
+				clearInterval(interval);		
+			});	
+			$('.LataRosa').click(function(){
+				
+				dhtml.sendEvent('4', 'LataRosa', null);
+            // Lanzamiento evento Click
+            console.log("LataRosa")
+
+				indexLoad = 2;
+				loadGLB();
+				$('.indicador').fadeOut(300);
+				clearInterval(interval);		
+			});	
+
+
+/*
+			$(".container").one("touchstart", function (){
+       
+       dhtml.sendEvent('1', 'move_3d', null); 
+       console.log("reveal");
+ 
+       });
+ 
+       $(".container").one("mousedown", function (){
+ 
+         dhtml.sendEvent('1', 'move_3d', null); 
+       console.log("reveal");
+       });
+      */
+/*
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = ( event.clientX - windowHalfX ) / 2;
+				mouseY = ( event.clientY - windowHalfY ) / 2;
+
+			}
+*/
+			//
+
+			function autoChange(){
+					//console.log("cambiando");
+					indexLoad++;
+					loadGLB();
+
+					if(indexLoad == GLBModels.length){
+						indexLoad = -1;
+					}
+				}	
+
+
+
+			var interval = setInterval(autoChange, 1800);
+
+
+
+			function animate() {	
+				requestAnimationFrame( animate );
+				controls.update();
+				renderer.render( scene, camera );
+				camera.lookAt( scene.position );
+
+			}
+
+			
+
+
+
+
+			
+			
+		</script>
+
+	</body>
+</html>

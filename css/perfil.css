@@ -1,0 +1,42 @@
+#profile{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#profile h2{
+    color: #fff;
+}
+
+
+.typing::after {
+  content: var(--texto);
+  border-right: 2px solid #000;
+  padding-left: 5px;
+}
+
+@media (max-width: 768px){
+    #profile{
+        padding: 0 22px;
+        text-align: center;
+    }
+
+    #profile h2{
+        font-size: 1.35rem;
+        line-height: 1.35;
+    }
+}
+
+@media (max-width: 420px){
+    #profile h2{
+        font-size: 1.12rem;
+    }
+}

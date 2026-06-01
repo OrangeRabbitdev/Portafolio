@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KG Designs</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css/portafolio.css">
+    <link rel="stylesheet" href="css/contacto.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+<body class="body">
+    
+    <div id="contenido1" class="secciones">
+
+        <header class="topside">
+            <img src="img/iso.png">
+        </header>
+
+        <aside class="lateral-menu">
+            <ul class="menu">
+                <li id="inicio" class="active">Home</li>
+                <li id="proyectos">Projects</li>
+                <li id="contacto">Contact</li>
+            </ul>
+        </aside>
+
+        <article id="profile">
+            <h2 class="typing">Hi, i'm Kevin, </h2>
+        </article>
+
+    </div>
+
+
+
+
+    <div id="contenido2" class="secciones">
+        
+        <h2 class="titulos">Click on intereseted section.</h2>
+
+        <div class="seccion-portafolio">
+
+
+
+            <article id="videojuegos">
+                <div class="mascara-portafolio">
+                    <img src="img/p1.jpg" alt="">
+                </div>
+                <h2>Video Games</h2>
+            </article>
+            <article id="web">
+                <div class="mascara-portafolio">
+                    <img src="img/p2.jpg" alt="">
+                </div>
+                <h2>Web</h2>
+            </article>
+            <article id="3D">
+                <div class="mascara-portafolio">
+                    <img src="img/p3.jpg" alt="">
+                </div>
+                <h2>3D</h2>
+            </article>
+            <article id="design">
+                <div class="mascara-portafolio">
+                    <img src="img/p4.webp" alt="">
+                </div>
+                <h2>Graphic Design</h2>
+            </article>
+        </div>
+
+    </div>
+
+
+    <div id="contenido3" class="secciones">
+        <div id="contactos">
+            <article id="whatsapp">
+                <img src="img/whatsapp.png" alt="">
+                <h2>+57 3155146984</h2>
+            </article>
+            <article id="linkedin">
+                <img src="img/linkedin.png" alt="">
+                <h2>https://www.linkedin.com/in/kevin-gonzález-a528a3161</h2>
+            </article>
+            <article id="gmail">
+                <img src="img/gmail.png" alt="">
+                <h2>kevingonzalez.developer@gmail.com</h2>
+            </article>
+        </div>
+        
+        <h2 id="despedida">We will meet soon!</h2>
+
+    </div>
+
+
+    <!--POPUP HTML-->
+    <div id="popup-overlay">
+        <div id="popup-contenido">
+            <span id="popup-cerrar">&times;</span>
+            <div id="popup-body"></div>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+    <script src="js/popup.js"></script>
+    <!-- THREEJS -->
+    <script type="module" src="js/threejs.js"></script>
+    
+
+</body>
+</html>
