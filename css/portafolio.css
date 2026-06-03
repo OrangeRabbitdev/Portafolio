@@ -1,9 +1,9 @@
 .mascara-portafolio {
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 270px;
+    height: 270px;
     border: 1px solid #48A6CC;
-    margin: 10px;
+    margin: 0;
     border-radius:10px;
     transition: all .3s ease-in-out;
     cursor: pointer;
@@ -24,17 +24,28 @@
 }
 
 .seccion-portafolio{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 150px));
     justify-content: center;
     align-items: center;
+    gap: 32px 24px;
     
 }
 
 .seccion-portafolio article{
-    display: flex;  
+    display: flex;
+    grid-column: span 2;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.seccion-portafolio article:nth-last-child(2):nth-child(3n + 1){
+    grid-column: 2 / span 2;
+}
+
+.seccion-portafolio article:last-child:nth-child(3n + 1){
+    grid-column: 3 / span 2;
 }
 
 .seccion-portafolio article img{
@@ -52,6 +63,7 @@
 .seccion-portafolio article h2{
     pointer-events: none;
     margin-top:10px;
+    font-size: 1.2em;
 }
 
 /* OVERLAY */
@@ -224,6 +236,10 @@ iframe::-webkit-scrollbar{
         height: 260px;
     }
 
+    .seccion-portafolio{
+        grid-template-columns: repeat(6, minmax(0, 130px));
+    }
+
     #video-horizontal{
         width: 780px;
     }
@@ -235,9 +251,18 @@ iframe::-webkit-scrollbar{
 
 @media (max-width: 1200px){
     .seccion-portafolio{
-        flex-wrap: wrap;
+        grid-template-columns: repeat(4, minmax(0, 120px));
         gap: 28px 18px;
-        max-width: 650px;
+    }
+
+    .seccion-portafolio article,
+    .seccion-portafolio article:nth-last-child(2):nth-child(3n + 1),
+    .seccion-portafolio article:last-child:nth-child(3n + 1){
+        grid-column: span 2;
+    }
+
+    .seccion-portafolio article:last-child:nth-child(2n + 1){
+        grid-column: 2 / span 2;
     }
 
     .mascara-portafolio{
@@ -278,8 +303,15 @@ iframe::-webkit-scrollbar{
 @media (max-width: 768px){
     .seccion-portafolio{
         width: 100%;
-        max-width: 360px;
+        grid-template-columns: minmax(0, 260px);
         gap: 24px;
+    }
+
+    .seccion-portafolio article,
+    .seccion-portafolio article:nth-last-child(2):nth-child(3n + 1),
+    .seccion-portafolio article:last-child:nth-child(3n + 1),
+    .seccion-portafolio article:last-child:nth-child(2n + 1){
+        grid-column: 1;
     }
 
     .mascara-portafolio{
