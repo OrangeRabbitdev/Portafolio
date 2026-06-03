@@ -52,6 +52,11 @@ $(document).ready(function () {
         $("#popup-body").load("templates/design.html");
     });
 
+    $("#tech").on("click", function () {
+        cargarPopup();
+        $("#popup-body").load("templates/tech.html");
+    });
+
 
 
 
