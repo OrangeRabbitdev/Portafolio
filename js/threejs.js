@@ -3,12 +3,25 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 
 const contenedor = document.getElementById("contenido1");
 const scene = new THREE.Scene();
+let model;
 
 function getRenderSize(){
     return {
         width: window.innerWidth,
         height: window.innerHeight
     };
+}
+
+function isMobilePortrait(){
+    return window.innerWidth <= 768 && window.innerHeight > window.innerWidth;
+}
+
+function applyModelLayout(){
+    if (!model) return;
+
+    const xPosition = isMobilePortrait() ? -0.05 : 1.7;
+    model.position.set(xPosition, 0.2, 0);
+    model.scale.set(0.3, 0.3, 0.3);
 }
 
 const camera = new THREE.PerspectiveCamera(
@@ -34,6 +47,7 @@ function resizeRenderer(){
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
+    applyModelLayout();
 }
 
 resizeRenderer();
@@ -63,12 +77,12 @@ const conejoUrl = new URL("../3d/conejo.glb", import.meta.url).href;
   loader.load(
     conejoUrl,
     (gltf) => {
-      const model = gltf.scene;
+      model = gltf.scene;
       scene.add(model);
 
       // Opcional: escalar o mover
       model.scale.set(0.45, 0.45, 0.45);
-      model.position.set(1.7, 0.2, 0);
+      applyModelLayout();
       model.rotation.set(0, 15, 0);
 
       mixer = new THREE.AnimationMixer(model);

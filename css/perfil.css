@@ -27,11 +27,13 @@
     #profile{
         padding: 0 22px;
         text-align: center;
+        justify-content: start;
     }
 
     #profile h2{
         font-size: 1.35rem;
         line-height: 1.35;
+        margin-top: 70%;
     }
 }
 
